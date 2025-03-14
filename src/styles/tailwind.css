@@ -1,13 +1,31 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 
-
 @theme {
-  /* Her tilføjes theme variable // tokens */
-}
+  /*Infinite scroll animation*/
+  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
 
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+@theme {
+  /*custom cursor*/
+  --handcursor: url(/curser.png) 25 25, pointer;
+}
+@layer base {
+  a,
+  button {
+    @apply cursor-(--handcursor);
+  }
+}
 @layer base {
   *,
   ::after,
@@ -18,11 +36,11 @@
   }
 
   /*Tobii mods*/
-    .tobii-zoom{
-      width: 100%;
+  .tobii-zoom {
+    width: 100%;
   }
   .tobii__slide figure > img {
-      padding-bottom: 50px;
+    padding-bottom: 50px;
   }
 
   /* iframe {
@@ -31,13 +49,22 @@
   } */
 
   .tobii {
-      background-color: black;
+    background-color: black;
   }
 }
-
-@layer components{
-
+#videoonhover .video-container {
+  position: relative;
+  overflow: hidden; /* Sørg for, at videoen ikke stikker udenfor containeren */
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-@layer utilities{
-  
+
+#videoonhover .video-container.hovered video {
+  transform: scale(1.05); /* Skaler videoen lidt op */
+  opacity: 0.8; /* Reducer opaciteten */
+}
+
+@layer components {
+}
+
+@layer utilities {
 }
